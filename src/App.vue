@@ -1,18 +1,14 @@
 <template>
     <div id="app">
         <h1 class="mb-4">Trivia Game</h1>
-        <TriviaConfigure />
+        <router-view />
     </div>
 </template>
 
 <script>
-import TriviaConfigure from "./components/TriviaConfigure.vue";
-
 export default {
     name: "App",
-    components: {
-        TriviaConfigure,
-    },
+    components: {},
 };
 </script>
 
