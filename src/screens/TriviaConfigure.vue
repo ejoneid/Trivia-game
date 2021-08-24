@@ -17,7 +17,10 @@
 
             <fieldset class="mb-3">
                 <label class="form-label">Category</label>
-                <select class="form-select" v-model="selectedCategory">
+                <select
+                    :class="{ 'form-select': true, 'is-invalid': this.categoryError }"
+                    v-model="selectedCategory"
+                >
                     <option value="">-- Choose category --</option>
                     <option v-for="category of categories" :value="category.id" :key="category.id">
                         {{ category.name }}
@@ -27,7 +30,10 @@
 
             <fieldset class="mb-3">
                 <label class="form-label">Difficulty</label>
-                <select class="form-select" v-model="selectedDifficulty">
+                <select
+                    :class="{ 'form-select': true, 'is-invalid': this.difficultyError }"
+                    v-model="selectedDifficulty"
+                >
                     <option value="">-- Choose Difficulty --</option>
                     <option v-for="difficulty of difficulties" :key="difficulty">{{
                         difficulty
@@ -43,6 +49,7 @@
 <script>
 // import { getCategories } from "@/API/opentdb.js";
 import { CATEGORIES } from "@/mocks/categories.mock.js";
+import { setConfig } from "@/utils/config.js";
 
 export default {
     name: "TriviaConfigure",
@@ -53,6 +60,8 @@ export default {
             selectedCategory: "",
             selectedDifficulty: "",
             numberOfQuestions: 10,
+            categoryError: false,
+            difficultyError: false,
         };
     },
     watch: {},
@@ -66,7 +75,25 @@ export default {
     },
     methods: {
         onConfigureSubmit() {
-            console.log(this.numberOfQuestions);
+            this.categoryError = false;
+            this.DifficultyError = false;
+
+            if (!this.selectedCategory) {
+                this.categoryError = true;
+                return;
+            }
+
+            if (!this.selectedDifficulty) {
+                this.difficultyError = true;
+                return;
+            }
+
+            setConfig({
+                numberOfQuestions: this.numberOfQuestions,
+                category: this.selectedCategory,
+                difficulty: this.selectedDifficulty,
+            });
+            this.$router.push("/game");
         },
     },
 };
