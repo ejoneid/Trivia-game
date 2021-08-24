@@ -1,5 +1,6 @@
 <template>
     <main class="container">
+        <h1 class="mb-4">Trivia Game</h1>
         <form @submit.prevent="onConfigureSubmit">
             <fieldset class="mb-3">
                 <label :key="numberOfQuestions" class="form-label"
@@ -41,14 +42,14 @@
                 </select>
             </fieldset>
 
-            <button type="submit" class="btn btn-primary">Play</button>
+            <button type="submit" class="btn btn-primary btn-lg">Play</button>
         </form>
     </main>
 </template>
 
 <script>
-// import { getCategories } from "@/API/opentdb.js";
-import { CATEGORIES } from "@/mocks/categories.mock.js";
+import { getCategories } from "@/API/opentdb.js";
+// import { CATEGORIES } from "@/mocks/categories.mock.js";
 import { setConfig } from "@/utils/config.js";
 
 export default {
@@ -67,8 +68,8 @@ export default {
     watch: {},
     async created() {
         try {
-            // this.categories = await getCategories();
-            this.categories = CATEGORIES;
+            const response = await getCategories();
+            this.categories = response.trivia_categories;
         } catch (error) {
             this.error = error.message;
         }
@@ -91,7 +92,7 @@ export default {
             setConfig({
                 numberOfQuestions: this.numberOfQuestions,
                 category: this.selectedCategory,
-                difficulty: this.selectedDifficulty,
+                difficulty: this.selectedDifficulty.toLowerCase(),
             });
             this.$router.push("/game");
         },
