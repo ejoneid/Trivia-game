@@ -3,9 +3,14 @@
         <p>{{ `${questionCounter + 1}/${questions.length}` }}</p>
         <h2 v-html="currentQuestion.question" class="mb-3"></h2>
         <div class="d-grid gap-2 col-6 mx-auto">
-            <button class="btn btn-primary btn-lg" v-for="option in options" :key="option" v-on:click="handleOptionClick(option)" v-html="option">            </button>
+            <button
+                class="btn btn-primary btn-lg"
+                v-for="option in options"
+                :key="option"
+                v-on:click="handleOptionClick(option)"
+                v-html="option"
+            ></button>
         </div>
-        
     </main>
 </template>
 
@@ -26,7 +31,7 @@ export default {
             this.results.push({
                 question: this.currentQuestion.question,
                 userAnswer: option,
-                correct_answer: this.currentQuestion.correct_answer,
+                correctAnswer: this.currentQuestion.correct_answer,
             });
 
             if (this.questionCounter >= this.questions.length - 1) {

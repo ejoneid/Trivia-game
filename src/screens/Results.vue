@@ -1,17 +1,24 @@
 <template>
     <div class="container">
         <h2 class="mb-4">Results</h2>
-        <h4 class="mb-3" >Your scored <span v-html="this.score"></span> points!</h4>
-        <table class="mb-5">
+        <h4 class="mb-3">Your scored <span v-html="this.score"></span> points!</h4>
+        <table class="table mb-5">
             <tr>
                 <th>Question</th>
                 <th>Your answer</th>
                 <th>Correct answer</th>
             </tr>
-            <tr v-for="(result, index) in results" :key="index">
+            <tr
+                :class="{
+                    correct: result.userAnswer == result.correctAnswer,
+                    incorrect: result.userAnswer != result.correctAnswer,
+                }"
+                v-for="(result, index) in results"
+                :key="index"
+            >
                 <td v-html="result.question"></td>
                 <td v-html="result.userAnswer"></td>
-                <td v-html="result.correct_answer"></td>
+                <td v-html="result.correctAnswer"></td>
             </tr>
         </table>
 
@@ -48,5 +55,21 @@ export default {
 <style scoped>
 button {
     margin-inline: 5px;
+}
+
+th {
+    border-bottom: 1px solid lightgrey;
+}
+
+table {
+    border: 1px solid lightgrey;
+}
+
+.correct {
+    background-color: rgb(179, 255, 179);
+}
+
+.incorrect {
+    background-color: rgb(255, 155, 155);
 }
 </style>
