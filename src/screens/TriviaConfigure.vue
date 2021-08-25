@@ -1,7 +1,9 @@
 <template>
     <main class="container">
         <h1 class="mb-4">Trivia Game</h1>
-        <form @submit.prevent="onConfigureSubmit">
+        <div class="row" >
+            <div class="col-4 offset-4">
+                <form  @submit.prevent="onConfigureSubmit">
             <fieldset class="mb-3">
                 <label :key="numberOfQuestions" class="form-label"
                     >Number of questions: {{ numberOfQuestions }}</label
@@ -44,6 +46,8 @@
 
             <button type="submit" class="btn btn-primary btn-lg">Play</button>
         </form>
+            </div>
+        </div>
     </main>
 </template>
 
@@ -99,3 +103,6 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+</style>

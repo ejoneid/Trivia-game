@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <h2 class="mb-4">Results</h2>
-        <p>Your scored <span v-html="this.score"></span> points!</p>
-        <table class="table mb-3">
+        <h4 class="mb-3" >Your scored <span v-html="this.score"></span> points!</h4>
+        <table class="mb-5">
             <tr>
                 <th>Question</th>
                 <th>Your answer</th>
@@ -15,10 +15,10 @@
             </tr>
         </table>
 
-        <button class="btn btn-primary" v-on:click="homeClick">
+        <button class="btn btn-primary btn-lg" v-on:click="homeClick">
             Home
         </button>
-        <button class="btn btn-primary" v-on:click="replayClick">Play again</button>
+        <button class="btn btn-primary btn-lg" v-on:click="replayClick">Play again</button>
     </div>
 </template>
 
@@ -45,4 +45,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+button {
+    margin-inline: 5px;
+}
+</style>
